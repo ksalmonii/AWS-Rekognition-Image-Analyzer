@@ -10,7 +10,7 @@ A serverless pipeline built on AWS that automatically resizes uploaded images, s
 •	Infrastructure as Code: Entire AWS infrastructure is provisioned using Terraform.
 •	Secure: IAM roles and policies ensure least-privilege access.
 🏗️ Architecture
-https://lucid.app/publicSegments/view/7d3c9aa4-8f0a-4f47-8f6e-abc123456789/image.png
+
 1.	Client uploads an image via a POST request to Amazon API Gateway.
 2.	API Gateway triggers an AWS Lambda function.
 3.	The Lambda function:
