@@ -11,6 +11,12 @@ This project is a full-stack cloud application that allows users to upload image
 - Saves metadata about the image in DynamoDB
 - Returns the annotated image URL and metadata to the frontend
 
+🧾 Files Included
+main.tf, lambda.tf, iam.tf, s3.tf, outputs.tf
+lambda.zip – zipped Python Lambda function
+project write up– visual overview of the infrastructure
+screenshots/ – AWS console screenshots for documentation
+
 ## Frontend
 
 The `index.html` file provides a simple interface for users to upload images. It sends the image to an API Gateway endpoint using a POST request with base64-encoded image data.
@@ -63,6 +69,11 @@ Ensure the Lambda execution role has the following permissions:
 - `s3:GetObject`
 - `s3:PutObject`
 - `dynamodb:PutItem`
+- 
+Access the Frontend
+
+Visit the S3 static website endpoint (shown in Terraform output).
+Upload an image and view the processed results.
 
 ## Output
 
@@ -72,6 +83,35 @@ The Lambda function returns a JSON response with:
 - `imageId`: Unique ID for the image
 - `annotatedImageUrl`: S3 URL of the annotated image
 - `metadata`: Metadata stored in DynamoDB
+
+
+## 🚀 How to Deploy
+
+### Prerequisites
+
+- AWS CLI configured with appropriate credentials
+- Terraform v1.3.0 or higher
+- A zipped Lambda deployment package named `lambda.zip` in the root directory
+
+### Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/<your-username>/rekognition-project.git
+   cd rekognition-project
+   ```
+terraform init
+
+terraform import aws_iam_role.lambda_execution_role rekognition-function-role-ghhd38td
+terraform import aws_lambda_function.rekognition_function rekognition-function
+terraform import aws_dynamodb_table.image_metadata image-resizer-database
+terraform import aws_s3_bucket.image_bucket rekognition-project-target
+terraform import aws_s3_bucket.frontend_bucket rekonitions3
+
+terraform plan
+
+terraform apply
+
 
 ## Author
 
